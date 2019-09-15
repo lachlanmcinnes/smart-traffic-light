@@ -39,12 +39,14 @@ function simulateCars(){
 	timeout = setTimeout(simulateCars, 5000);
 }
 
-startSimulation();
+//startSimulation();
 
 //Action for device
 device
 	.on('connect', () => {
 		console.log('connected');
+		device.publish('test', 'hello IOT Core');
+		console.log('Message Sent')
 		isConnected=true;
 		device.subscribe('ChangeState');
 	}
@@ -56,4 +58,9 @@ device
 	}
 );
 
+module.exports = {
+	state: state,
+	startSimulation: startSimulation,
+	stopSimulation: stopSimulation
+}
 
